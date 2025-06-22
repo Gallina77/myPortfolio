@@ -1,0 +1,16 @@
+{% extends "bootstrap/base.html" %}
+
+{% block title %}Home - My Portfolio{% endblock %}
+
+{% block content %}
+<div class="container mt-4">
+    <div class="row">
+        <div class="col-md-12">
+            <h1 class="display-4">Welcome to My Portfolio</h1>
+            <p class="lead">This is built with Flask and Bootstrap 4.</p>
+            <hr class="my-4">
+            <a href="{{ url_for('single') }}" class="btn btn-primary btn-lg">Go to Single Page</a>
+        </div>
+    </div>
+</div>
+{% endblock %}

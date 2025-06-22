@@ -1,0 +1,48 @@
+{% include "header.html" %}
+{% include "hero.html" %}
+<div class="container">
+    <div class="project-details" id="morse-code-details">
+        <a href="{{url_for('portfolio')}}" class="back-btn">
+            <i class="fas fa-arrow-left"></i> Back to Portfolio
+        </a>
+
+        <div class="detail-header">
+            <h2 class="detail-title">Morse Code Translator</h2>
+            <p class="detail-subtitle">A text-based Python program to convert Strings into Morse Code</p>
+        </div>
+
+        <div class="detail-section">
+            <h4>Project Overview</h4>
+            <p>This Morse Code Translator was built as part of my Python learning journey. It demonstrates
+                string manipulation, dictionary usage, and basic Flask web development concepts for creating
+                a simple but functional web application.</p>
+        </div>
+
+        <div class="detail-section">
+            <h4>Features</h4>
+            <ul>
+                <li>Convert text to Morse code</li>
+                <li>Convert Morse code back to text</li>
+                <li>Clean, responsive web interface</li>
+                <li>Input validation and error handling</li>
+                <li>Support for letters, numbers, and common punctuation</li>
+            </ul>
+        </div>
+
+        <div class="detail-section">
+            <h4>Technologies Used</h4>
+            <div class="project-tech">
+                <span class="tech-tag">Python</span>
+                <span class="tech-tag">Flask</span>
+                <span class="tech-tag">HTML/CSS</span>
+            </div>
+        </div>
+
+        <div class="detail-section">
+            <h4>Learning Outcomes</h4>
+            <p>This project strengthened my understanding of string manipulation, dictionary data structures, and encoding/decoding logic.
+                Using Flask, I learned how to handle routes, forms, and templates to build an interactive web app.
+                It also introduced me to input validation, error handling, and the basics of the request-response cycle in web development.</p>
+        </div>
+    </div>
+</div>

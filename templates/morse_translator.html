@@ -1,0 +1,65 @@
+{% include "header.html" %}
+{% include "hero.html" %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <div class="morse-icon">···—·—···</div>
+        <h1 class="hero-title text-center">Morse Code Translator</h1>
+        <p class="hero-subtitle text-center">Convert text to Morse code and back with ease.
+            Perfect for learning or secret communication.</p>
+    </div>
+    <!-- Information Section -->
+    <div class="info-section">
+        <h3 class="info-title">How to Use</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>Text to Morse</h4>
+                <p>Simply type your message in plain text, and it will be converted to Morse code. Letters, numbers, and
+                    common punctuation are supported.</p>
+            </div>
+            <div class="info-card">
+                <h4>Morse to Text</h4>
+                <p>Enter Morse code with spaces between letters and " / " between words. For example: ".... . .-.. .-..
+                    --- / .-- --- .-. .-.. -.."</p>
+            </div>
+            <div class="info-card">
+                <h4>Switch Modes</h4>
+                <p>Use the switch button to toggle between conversion modes. Your previous output becomes the new input
+                    automatically.</p>
+            </div>
+            <div class="info-card">
+                <h4>Morse Code Basics</h4>
+                <p>Dots (.) are short signals, dashes (-) are long signals. Each letter has a unique pattern of dots and
+                    dashes.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Translator -->
+    <div class="translator-container">
+        <form method="POST" class="translator-form">
+            <div class="input-group">
+                <label class="input-label" for="input_text">Your Text goes here</label>
+                <textarea name="input_text" id="input_text" class="text-input">{{ input_text }}</textarea>
+            </div>
+
+            <div class="button-group">
+
+                <!-- Text to Morse Button -->
+                <button type="submit" name="translation_mode" value="text_to_morse" class="btn btn-primary">
+                    <div class="mode-text">Text → Morse Code</div>
+                </button>
+
+                <!-- Morse to Text Button -->
+                <button type="submit" name="translation_mode" value="morse_to_text" class="btn btn-primary">
+                    <div class="mode-text">Morse Code → Text</div>
+                </button>
+            </div>
+        </form>
+        <div class="input-group">
+                <label class="output-label" for="text-output">Your Text goes here</label>
+                <textarea name="text-output" id="text-output" class="text-output" readonly>{{ translated_text }}</textarea>
+        </div>
+    </div>
+</div>
+{% include "footer.html" %}

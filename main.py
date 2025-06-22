@@ -1,10 +1,18 @@
-from flask import Flask, render_template, request, flash, redirect, url_for
+from flask import Flask, render_template, request
 from portfolio.morse_code_translator import MorseCodeTranslator
+from flask_sqlalchemy import SQLAlchemy
 import os
 
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
+
+class Base(DeclarativeBase):
+    pass
+
+app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
+db = SQLAlchemy(model_class=Base)
+db.init_app(app)
 
 @app.route('/')
 def index():

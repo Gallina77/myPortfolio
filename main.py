@@ -1,9 +1,10 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from portfolio.morse_code_translator import MorseCodeTranslator
+import os
 
 
 app = Flask(__name__)
-app.secret_key = "Here is my secret key"
+app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 
 @app.route('/')
 def index():

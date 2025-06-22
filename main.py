@@ -3,6 +3,7 @@ from sqlalchemy.orm import DeclarativeBase
 from portfolio.morse_code_translator import MorseCodeTranslator
 from flask_sqlalchemy import SQLAlchemy
 import os
+import psycopg2
 
 
 app = Flask(__name__)

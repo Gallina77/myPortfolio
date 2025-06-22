@@ -1,4 +1,5 @@
 from flask import Flask, render_template, request
+from sqlalchemy.orm import DeclarativeBase
 from portfolio.morse_code_translator import MorseCodeTranslator
 from flask_sqlalchemy import SQLAlchemy
 import os

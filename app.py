@@ -1,8 +1,9 @@
 from flask import Flask, render_template, request, flash, redirect, url_for
 from portfolio.morse_code_translator import MorseCodeTranslator
 
+
 app = Flask(__name__)
-app.secret_key = 'your-secret-key'
+app.secret_key = "Here is my secret key"
 
 @app.route('/')
 def index():
@@ -36,4 +37,4 @@ def morse_translator():
                            input_text=input_text)
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(debug=False)

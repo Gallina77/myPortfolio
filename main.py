@@ -1,7 +1,5 @@
 from flask import Flask, render_template, request
-from sqlalchemy.orm import DeclarativeBase
 from portfolio.morse_code_translator import MorseCodeTranslator
-from flask_sqlalchemy import SQLAlchemy
 import os
 import psycopg2
 
@@ -9,12 +7,11 @@ import psycopg2
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 
-class Base(DeclarativeBase):
-    pass
+DATABASE_URL = os.environ.get('DB_URI')
 
-app.config['SQLALCHEMY_DATABASE_URI'] = os.environ.get('DB_URI')
-db = SQLAlchemy(model_class=Base)
-db.init_app(app)
+conn = psycopg2.connect(DATABASE_URL)
+#Replace user and password with your Postgres username and password, host and #port with the values in your database URL, and database_name with the name of #your database.
+cur = conn.cursor()
 
 @app.route('/')
 def index():

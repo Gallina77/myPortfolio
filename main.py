@@ -3,12 +3,10 @@ from portfolio.morse_code_translator import MorseCodeTranslator
 import os
 import psycopg2
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 
 #DATABASE_URL = os.environ.get('DB_URI')
-
 #conn = psycopg2.connect(DATABASE_URL)
 #Replace user and password with your Postgres username and password, host and #port with the values in your database URL, and database_name with the name of #your database.
 #cur = conn.cursor()
@@ -17,14 +15,19 @@ app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 def index():
     return render_template('index.html')
 
+#TODO: Fix the filtering
 @app.route('/portfolio')
 def portfolio():
     return render_template('portfolio.html')
 
+#TODO: have a modular approach by storing and retrieving values in the database about the specific learnings
 @app.route('/project')
 def project():
     return render_template('project.html')
 
+#TODO: input validation and error handling
+#TODO: when refreshing stay in the same area
+#TODO: back-button
 @app.route('/morse_translator', methods=['GET', 'POST'])
 def morse_translator():
     # Initialize translator
@@ -43,6 +46,10 @@ def morse_translator():
     return render_template('morse_translator.html',
                            translated_text=translated_text,
                            input_text=input_text)
+
+@app.route('/tic_tac_toe', methods=['GET', 'POST'])
+def tic_tac_toe():
+    return render_template('tic_tac_toe.html')
 
 if __name__ == '__main__':
     app.run(debug=False)

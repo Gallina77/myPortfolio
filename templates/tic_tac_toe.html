@@ -19,4 +19,37 @@
             </div>
         </div>
     </div>
+    <div class="translator-container">
+        <form method="GET" class="tic_tac_toe_form">
+            <div class="button-group">
+                <!-- Text to Morse Button -->
+                <button type="submit" name="reset_game" value="reset_game" class="btn btn-primary">
+                    <div class="mode-text">Reset Game</div>
+                </button>
+            </div>
+        </form>
+        <div class="input-group">
+            <table>
+                {% for i in range(0, 9, 3) %}
+                <tr>
+                    {% for r in range(3) %}
+                    <td>
+                        {% set index = i + r %}
+                        {% if board[index] %}
+                        {{ board[index] }}
+                        {% else %}
+                        <form method="post">
+                            <input type="hidden" name="cell" value="{{ index }}">
+                            <button type="submit" class="btn btn-primary">&nbsp;
+                            </button>
+                        </form>
+                        {% endif %}
+                    </td>
+                    {% endfor %}
+                </tr>
+                {% endfor %}
+            </table>
+        </div>
+    </div>
 </div>
+{% include "footer.html" %}

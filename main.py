@@ -1,7 +1,7 @@
 from flask import Flask, render_template, request
 from portfolio.morse_code_translator import MorseCodeTranslator
 import os
-import psycopg2
+from portfolio.tic_tac_toe import TicTacToe
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
@@ -49,7 +49,13 @@ def morse_translator():
 
 @app.route('/tic_tac_toe', methods=['GET', 'POST'])
 def tic_tac_toe():
-    return render_template('tic_tac_toe.html')
+    game = TicTacToe()
+
+    if request.method == 'POST':
+        pos = int(request.form['cell'])
+        game.next_move(pos)
+
+    return render_template('tic_tac_toe.html', board=game.grid, message=game.message)
 
 if __name__ == '__main__':
     app.run(debug=False)

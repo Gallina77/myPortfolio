@@ -3,12 +3,12 @@ import random
 class TicTacToe:
     def __init__(self):
 
-        self.grid={"A1":"", "A2":"", "A3":"",
-                   "A4":"", "A5":"", "A6":"" ,
-                   "A7":"", "A8":"", "A9":""}
-        self.winning_combos=[["A1", "A2", "A3"], ["A4", "A5", "A6"], ["A7", "A8", "A9"], #horizontal
-                             ["A1", "A4", "A7"], ["A2", "A5", "A8"], ["A3", "A6", "A9"], #vertical
-                             ["A1", "A5", "A9"], ["A3", "A5", "A7"]] #diagonal
+        self.grid={"1":"", "2":"", "3":"",
+                   "4":"", "5":"", "6":"" ,
+                   "7":"", "8":"", "9":""}
+        self.winning_combos=[["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], #horizontl
+                             ["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], #verticl
+                             ["1", "5", "9"], ["3", "5", "7"]] #diagonal
         self.combo = None
         self.message = None
         self.game_over = False
@@ -20,7 +20,7 @@ class TicTacToe:
     def validate_position(self, position):
         """Validate if position is valid and available"""
         if position not in self.grid.keys():
-            self.message = "This is outside the grid. Place your mark between A1 and A9!"
+            self.message = "This is outside the grid. Place your mark between 1 and 9!"
             return False
         elif self.grid[position] != "":
             self.message = f"This place is already taken {position}"
@@ -57,8 +57,8 @@ class TicTacToe:
                 if self.grid[pos] == "":
                     self.position = pos
         # takes center if available
-        elif self.grid["A5"]== "":
-            self.position = "A5"
+        elif self.grid["5"]== "":
+            self.position = "5"
         # takes any other available place
         else:
             left_places = [k for k, v in self.grid.items() if v == ""]
@@ -80,11 +80,11 @@ class TicTacToe:
         if not self.game_over:
             self.switch_player()
 
-    def next_move(self):
+    def next_move(self, pos):
         """Main game loop - only handles input and orchestration"""
         while not self.game_over:
             if self.current_player == "Player 1":
-                self.position = input(f"Place your mark {self.current_player}: ")
+                self.position = pos
             elif self.current_player == "Player 2":
                 self.get_ai_move()
 

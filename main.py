@@ -1,4 +1,4 @@
-from flask import Flask, render_template, request
+from flask import session, redirect, url_for, request, render_template, Flask
 from portfolio.morse_code_translator import MorseCodeTranslator
 import os
 from portfolio.tic_tac_toe import TicTacToe
@@ -43,19 +43,50 @@ def morse_translator():
             input_text = request.form['input_text']
             translated_text = translator.decrypt(input_text)
 
-    return render_template('morse_translator.html',
+    return render_template('projects/morse_translator.html',
                            translated_text=translated_text,
                            input_text=input_text)
 
 @app.route('/tic_tac_toe', methods=['GET', 'POST'])
 def tic_tac_toe():
-    game = TicTacToe()
+    # Handle reset with query param
+    if request.method == 'GET' and request.args.get('reset_game'):
+        # Clear session to reset the game
+        session.pop('grid', None)
+        session.pop('message', None)
+        session.pop('game_over', None)
+        return redirect(url_for('tic_tac_toe'))
 
-    if request.method == 'POST':
-        pos = int(request.form['cell'])
-        game.next_move(pos)
+    # Restore game state from session if it exists
+    if 'grid' in session:
+        game = TicTacToe()
+        game.grid = session['grid']
+        game.game_over = session.get('game_over', False)
+        game.message = session.get('message')
+    else:
+        game = TicTacToe()
 
-    return render_template('tic_tac_toe.html', board=game.grid, message=game.message)
+    # Handle player move on POST if game not over
+    if request.method == 'POST' and not game.game_over:
+        pos = request.form['cell']
+        game.player_move(pos)
+        if not game.game_over:
+            game.ai_move()
+
+        # Save updated state back to session
+        session['grid'] = game.grid
+        session['message'] = game.message
+        session['game_over'] = game.game_over
+
+        # Redirect after POST for clean refresh and avoid double POST on reload
+        return redirect(url_for('tic_tac_toe'))
+
+    return render_template('projects/tic_tac_toe.html',
+                           board=game.grid,
+                           message=game.message,
+                           game_over=game.game_over)
+
+
 
 if __name__ == '__main__':
     app.run(debug=False)

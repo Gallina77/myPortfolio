@@ -3,30 +3,20 @@ import random
 class TicTacToe:
     def __init__(self):
 
-        self.grid={"1":"", "2":"", "3":"",
-                   "4":"", "5":"", "6":"" ,
-                   "7":"", "8":"", "9":""}
-        self.winning_combos=[["1", "2", "3"], ["4", "5", "6"], ["7", "8", "9"], #horizontl
-                             ["1", "4", "7"], ["2", "5", "8"], ["3", "6", "9"], #verticl
-                             ["1", "5", "9"], ["3", "5", "7"]] #diagonal
+        self.grid={"0":"", "1":"", "2":"",
+                   "3":"", "4":"", "5":"" ,
+                   "6":"", "7":"", "8":""}
+        self.winning_combos=[["0", "1", "2"], ["3", "4", "5"], ["6", "7", "8"], #horizontl
+                             ["0", "3", "6"], ["1", "4", "7"], ["2", "5", "8"], #verticl
+                             ["0", "4", "8"], ["2", "4", "6"]] #diagonal
+
         self.combo = None
-        self.message = None
+        self.message = "Let's play TicTacToe!"
         self.game_over = False
         self.position = None
-        self.current_player = "Player 1"
-        self.player_symbol = "X"
+        self.current_player = None
+        self.player_symbol = None
 
-
-    def validate_position(self, position):
-        """Validate if position is valid and available"""
-        if position not in self.grid.keys():
-            self.message = "This is outside the grid. Place your mark between 1 and 9!"
-            return False
-        elif self.grid[position] != "":
-            self.message = f"This place is already taken {position}"
-            return False
-        else:
-            return True
 
     def has_places_left(self):
         left = ([v for v in self.grid.values() if v == ""])
@@ -57,13 +47,12 @@ class TicTacToe:
                 if self.grid[pos] == "":
                     self.position = pos
         # takes center if available
-        elif self.grid["5"]== "":
-            self.position = "5"
+        elif self.grid["4"]== "":
+            self.position = "4"
         # takes any other available place
         else:
             left_places = [k for k, v in self.grid.items() if v == ""]
             self.position = random.choice(left_places)
-
 
     def switch_player(self):
         if self.current_player == "Player 1":
@@ -79,46 +68,29 @@ class TicTacToe:
         self.check_if_winner()
         if not self.game_over:
             self.switch_player()
+            self.message = f"It's your turn {self.current_player}"
 
-    def next_move(self, pos):
-        """Main game loop - only handles input and orchestration"""
-        while not self.game_over:
-            if self.current_player == "Player 1":
-                self.position = pos
-            elif self.current_player == "Player 2":
-                self.get_ai_move()
+    def player_move(self, pos):
+        self.current_player = "Player 1"
+        self.player_symbol = "X"
+        self.make_move(pos)
 
-            if self.validate_position(self.position):
-                self.make_move(self.position)
-                if self.game_over:
-                    print(self.message)
-                    break
-                else:
-                    print(self.grid)
-
-            else:
-                print(self.message)
-
+    def ai_move(self):
+        self.current_player = "Player 2"
+        self.player_symbol = "O"
+        self.get_ai_move()
+        self.make_move(self.position)
 
     def check_if_winner(self):
-
-        result_player1 = [k for k,v in self.grid.items() if v=="X"]
-        result_player2 = [k for k,v in self.grid.items() if v=="O"]
-
+        result_current_player = [k for k,v in self.grid.items() if v==self.player_symbol]
         for combo in self.winning_combos:
-            if all(item in result_player1 for item in combo):
-                self.message = "Player 1 wins!"
-                self.game_over = True
-                break
-            elif all(item in result_player2 for item in combo):
-                self.message = "Player 2 wins"
+            if all(item in result_current_player for item in combo):
+                self.message = f"{self.current_player} wins!"
                 self.game_over = True
                 break
             else:
                 self.game_over = False
                 self.has_places_left()
 
-if __name__ == "__main__":
-    game = TicTacToe()
-    game.next_move()
+
 

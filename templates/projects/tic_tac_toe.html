@@ -1,0 +1,52 @@
+{% include "header.html" %}
+{% include "hero.html" %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <img class="medium-center-image" src="../static/images/tic_tac_toe_icon.png" alt="Tic Tac Toe Icon">
+        <h1 class="hero-title text-center">Tic Tac Toe</h1>
+        <p class="hero-subtitle text-center">This a classic puzzle game for two players, played on a 3x3 grid.</p>
+    </div>
+    <!-- Information Section -->
+    <div class="info-section">
+        <h3 class="info-title">How to Play</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <p>Welcome, Player 1! You're up first.
+                    It's time to start the game—place your "X" anywhere on the 3x3 grid to begin.
+                    Once you've made your move, the computer will respond with its own.
+                    The objective is to be the first to get
+                    three of your marks in a row, either horizontally, vertically, or diagonally.
+                    Have fun, and good luck! Let the game begin!</p>
+            </div>
+        </div>
+    </div>
+    <!-- Game Container -->
+    <div class="project-container">
+        <div class="game-status" id="gameStatus">{{ message }}</div>
+        <div class="game-board">
+            {% for k, v in board.items() %}
+            <div class="game-cell">
+                {% if board[k] %}
+                <button type="button"
+                        class="game-cell-button occupied {{ board[k]|lower }}">
+                    {{ v }}
+                </button>
+                {% else %}
+                <form method="post">
+                    <input type="hidden" name="cell" value="{{ k }}">
+                    <button type="submit" class="game-cell-button">{{ v }}</button>
+                </form>
+                {% endif %}
+            </div>
+            {% endfor %}
+        </div>
+        <form method="GET" class="tic_tac_toe_form">
+            <div class="button-group">
+                <button type="submit" name="reset_game" value="reset_game" class="btn btn-primary">Reset Game
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+{% include "footer.html" %}

@@ -1,0 +1,34 @@
+Project: Global Data Migration Initiative Timeline granularity: Sprint (2 weeks per sprint)
+Phases:
+Discovery & Planning: 2 sprints (4 weeks) — Sprint 1 to Sprint 2
+Proof of Concept (PoC): 6 sprints (12 weeks) — Sprint 3 to Sprint 8
+Core Platform Setup: 4 sprints (8 weeks), starts Sprint 3 (week 5) — Sprint 3 to Sprint 6
+Migration Wave 1 – EMEA: 4 sprints (8 weeks), starts after PoC completes (after Sprint 8) — Sprint 9 to Sprint 12
+Migration Wave 2 – APAC: 4 sprints (8 weeks), starts Sprint 15 — Sprint 15 to Sprint 18
+Migration Wave 3 – Americas: 4 sprints (8 weeks), starts Sprint 20 — Sprint 20 to Sprint 23
+Cutover Planning: starts after PoC (Sprint 9), runs in parallel until the end (Sprint 9 to Sprint 23)
+Hypercare & Stabilization: 1.5 sprints (3 weeks), starts after Wave 3 (after Sprint 23) — Sprint 24 to Sprint 25
+Milestones:
+PoC Completion: End of Sprint 8
+Migration Wave 3 Complete: End of Sprint 23
+Hypercare Complete: End of Sprint 25
+
+
+
+Project name: Hiscox unified platform
+
+Tasks:
+- Discovery: 6 weeks
+- Phase 1 Foundation and PoC: start after Discovery, duration 5 weeks
+- Phase 2a (SQL Server Only): start after Phase 1, duration 16 weeks
+- Phase 2b (Mass Migration): start after Phase 2a, duration 5 weeks
+- Phase 3 Harmonization: start after Phase 2b, duration 3 weeks
+- Business Readiness and Training: start after Discovery, for the entire period
+- Testing and Validation: start after Discovery, for the entire period
+- Governance and Reporting: start after Discovery, for the entire period
+
+Granularity: monthly
+
+Milestones:
+- Discovery end
+- Phase 2a end

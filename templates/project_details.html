@@ -4,42 +4,36 @@
     <div class="project-details" id="morse-code-details">
 
         <div class="detail-header">
-            <h2 class="detail-title">Morse Code Translator</h2>
-            <p class="detail-subtitle">A text-based Python program to convert Strings into Morse Code</p>
+            <h2 class="detail-title">{{project['title']}}</h2>
+            <p class="detail-subtitle">{{project['subtitle']}}</p>
         </div>
 
         <div class="detail-section">
             <h4>Project Overview</h4>
-            <p>This Morse Code Translator was built as part of my Python learning journey. It demonstrates
-                string manipulation, dictionary usage, and basic Flask web development concepts for creating
-                a simple but functional web application.</p>
+            <p>{{project['overview']}}.</p>
         </div>
 
         <div class="detail-section">
             <h4>Features</h4>
             <ul>
-                <li>Convert text to Morse code</li>
-                <li>Convert Morse code back to text</li>
-                <li>Clean, responsive web interface</li>
-                <li>Input validation and error handling</li>
-                <li>Support for letters, numbers, and common punctuation</li>
+                {% for feature in project['features'] %}
+                <li>{{feature}}</li>
+                 {% endfor %}
             </ul>
         </div>
 
         <div class="detail-section">
             <h4>Technologies Used</h4>
             <div class="project-tech">
-                <span class="tech-tag">Python</span>
-                <span class="tech-tag">Flask</span>
-                <span class="tech-tag">HTML/CSS</span>
+                {% for techno in project['technologies_used'] %}
+                <span class="tech-tag">{{techno}}</span>
+                {% endfor %}
             </div>
         </div>
 
         <div class="detail-section">
             <h4>Approach and Learning Outcomes</h4>
-            <p>This project strengthened my understanding of string manipulation, dictionary data structures, and encoding/decoding logic.
-                Using Flask, I learned how to handle routes, forms, and templates to build an interactive web app.
-                It also introduced me to input validation, error handling, and the basics of the request-response cycle in web development.</p>
+            <p>{{project['learning']}}</p>
         </div>
     </div>
 </div>

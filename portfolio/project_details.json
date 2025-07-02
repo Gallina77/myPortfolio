@@ -1,0 +1,41 @@
+{
+  "projects": [
+    {
+      "id": "1",
+      "title": "Morse Code Translator",
+      "subtitle": "A text-based Python program to convert Strings into Morse Code",
+      "overview": "This Morse Code Translator was built as part of my Python learning journey.It demonstrates string manipulation, dictionary usage, and basic Flask web development concepts for creating a simple but functional web application.",
+      "features": [
+        "Convert text to Morse code",
+        "Convert Morse code back to text",
+        "Clean, responsive web interface",
+        "Input validation and error handling",
+        "Support for letters, numbers, and common punctuation"
+      ],
+      "technologies_used": [
+        "Python",
+        "Flask",
+        "HTML/CSS"
+      ],
+      "learning": "This project strengthened my understanding of string manipulation, dictionary data structures, and encoding/decoding logic.\n                Using Flask, I learned how to handle routes, forms, and templates to build an interactive web app.\n                It also introduced me to input validation, error handling, and the basics of the request-response cycle in web development"
+    },
+    {
+      "id": "2",
+      "title": "Tic Tac Toe",
+      "subtitle": "A Python program implementing the classic Tic Tac Toe game",
+      "overview": "This Tic Tac Toe game was developed as a simple Python web application to practice game logic, control flow, and user input handling. It allows one player to take turns marking spaces on a 3x3 grid while playing against a computer opponent, with the game progressing until there is a winner or it ends in a draw.",
+      "features": [
+        "Two players: one human and one computer opponent making strategic moves",
+        "Interactive message display for game status updates",
+        "Win detection for rows, columns, and diagonals",
+        "Draw detection when all spaces are filled"
+      ],
+      "technologies_used": [
+        "Python",
+        "Flask",
+        "HTML/CSS"
+      ],
+      "learning": "Developing this project taught me how to implement unit testing and gave me experience managing partial control of the game state both within a Python class and the Flask app. I learned to encode the game logic using winning combinations. Currently, the app refreshes the page after each move, so gameplay could be smoother with AJAX or JavaScript. However, I intentionally built it using only the concepts I had learned so far."
+    }
+  ]
+}

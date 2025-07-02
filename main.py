@@ -1,7 +1,8 @@
 from flask import session, redirect, url_for, request, render_template, Flask
 from portfolio.morse_code_translator import MorseCodeTranslator
-import os
 from portfolio.tic_tac_toe import TicTacToe
+import os
+import json
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
@@ -20,10 +21,14 @@ def index():
 def portfolio():
     return render_template('portfolio.html')
 
-#TODO: have a modular approach by storing and retrieving values in the database about the specific learnings
-@app.route('/project_details')
-def project_details():
-    return render_template('project_details.html')
+@app.route('/project_details/<project_id>')
+def project_details(project_id):
+    with open("./portfolio/project_details.json") as f:
+        data = json.load(f)
+        project = next((p for p in data["projects"] if p["id"] == project_id), None)
+    print(project)
+
+    return render_template('project_details.html', project=project)
 
 #TODO: input validation and error handling
 #TODO: when refreshing stay in the same area

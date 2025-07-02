@@ -11,7 +11,7 @@ class TicTacToe:
                              ["0", "4", "8"], ["2", "4", "6"]] #diagonal
 
         self.combo = None
-        self.message = "Let's play TicTacToe!"
+        self.message = "Let's play Tic Tac Toe!"
         self.game_over = False
         self.position = None
         self.current_player = None

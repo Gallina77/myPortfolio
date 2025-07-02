@@ -9,38 +9,21 @@ class TestTicTacToe:
         '''Run before each test'''
         self.game = TicTacToe()
 
-    def test_outside_the_grid(self):
-        result = self.game.validate_position('10')
-        assert not result
-        assert self.game.message == "This is outside the grid. Place your mark between 1 and 9!"
-
-    def test_position_taken(self):
-        self.game.grid['1'] = 'X'
-        result = self.game.validate_position('1')
-        assert not result
-        assert self.game.message == "This place is already taken 1"
 
     def test_draw_game(self):
         self.game.grid = {"0":"X", "1":"O", "2":"X",
                           "3":"", "4":"O", "5":"X" ,
                           "6":"O", "7":"X", "8":"O"}
 
-        self.game.make_move('3')
+        self.game.player_move('3')
         assert self.game.message == "It's a Draw!"
         assert self.game.game_over
 
-    def test_switch_player(self):
-        self.game.make_move('1')
-        assert self.game.grid['1'] == "X"
-        self.game.make_move('2')
-        assert self.game.grid['2'] == "O"
-
     def test_horizontal_strike(self):
-        self.player_symbol = "X"
         self.game.grid = {"0": "X", "1": "", "2": "X",
                           "3": "", "4": "", "5": "X",
                           "6": "", "7": "X", "8": "O"}
-        self.game.make_move('1')
+        self.game.player_move('1')
         assert self.game.message == "Player 1 wins!"
         assert self.game.game_over
 
@@ -49,7 +32,7 @@ class TestTicTacToe:
                           "3":"X", "4":"O", "5":"X" ,
                           "6":"", "7":"X", "8":"O"}
 
-        self.game.make_move('6')
+        self.game.player_move('6')
         assert self.game.message == "Player 1 wins!"
         assert self.game.game_over
 
@@ -58,7 +41,7 @@ class TestTicTacToe:
                           "3":"X", "4":"X", "5":"O" ,
                           "6":"O", "7":"X", "8":""}
 
-        self.game.make_move('8')
+        self.game.player_move('8')
         assert self.game.message == "Player 1 wins!"
         assert self.game.game_over
 

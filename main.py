@@ -21,9 +21,9 @@ def portfolio():
     return render_template('portfolio.html')
 
 #TODO: have a modular approach by storing and retrieving values in the database about the specific learnings
-@app.route('/project')
-def project():
-    return render_template('project.html')
+@app.route('/project_details')
+def project_details():
+    return render_template('project_details.html')
 
 #TODO: input validation and error handling
 #TODO: when refreshing stay in the same area

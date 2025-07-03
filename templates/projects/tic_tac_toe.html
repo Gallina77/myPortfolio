@@ -24,7 +24,7 @@
     <!-- Game Container -->
     <div class="project-container">
         <div class="game-status" id="gameStatus">{{ message }}</div>
-        <div class="game-board">
+        <div class="game-board" id="gameBoard">
             {% for k, v in board.items() %}
             <div class="game-cell">
                 {% if board[k] %}
@@ -49,4 +49,8 @@
         </form>
     </div>
 </div>
+<script>
+    // Auto-focus on the textarea when page loads
+    document.getElementById('gameBoard').focus();
+</script>
 {% include "footer.html" %}

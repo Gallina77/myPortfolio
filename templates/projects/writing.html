@@ -1,0 +1,150 @@
+<!DOCTYPE html>
+<html>
+<head>
+   <title>Writing Space</title>
+   <style>
+       body {
+           margin: 0;
+           padding: 0;
+           font-family: Arial, sans-serif;
+           background-color: #f8f9fa;
+       }
+
+       #progress-bar {
+           position: fixed;
+           top: 0;
+           left: 0;
+           width: 100%;
+           height: 12px;
+           background: #28a745;
+           transition: width 1s linear;
+           z-index: 1000;
+       }
+
+       #writing-area {
+           width: 50%;
+           height: 90vh;
+           border: 1px solid #ddd;
+           padding: 20px;
+           font-size: 16px;
+           line-height: 1.5;
+           resize: none;
+           outline: none;
+           border-radius: 4px;
+           box-sizing: border-box;
+           margin: 0 auto;
+           display: block;
+           margin-top: 30px;
+       }
+
+       #writing-area:focus {
+           border-color: #007bff;
+       }
+
+       #writing-area:disabled {
+           background-color: #e9ecef;
+           opacity: 0.7;
+           cursor: not-allowed;
+       }
+
+       #activity-warning {
+           position: fixed;
+           top: 50px;
+           left: 50%;
+           transform: translateX(-50%);
+           background: #fff3cd;
+           border: 1px solid #ffeaa7;
+           color: #856404;
+           padding: 15px 20px;
+           border-radius: 5px;
+           display: none;
+           z-index: 1001;
+           font-weight: bold;
+           box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+       }
+   </style>
+</head>
+<body>
+   <div id="progress-bar"></div>
+   <div id="activity-warning">Keep typing or your work will be lost!</div>
+   <textarea id="writing-area" placeholder="Start writing your story...">{{prompt}}</textarea>
+
+   <script>
+       let timeLeft = {{ writing_time }};
+       const totalTime = {{ writing_time }};
+       let inactivityTimer;
+       let lastActivity = Date.now();
+
+       const textarea = document.getElementById('writing-area');
+       const progressBar = document.getElementById('progress-bar');
+       const warningDisplay = document.getElementById('activity-warning');
+
+       // Set initial progress bar to 100%
+       progressBar.style.width = '100%';
+
+       function updateProgressBar() {
+           const percentage = (timeLeft / totalTime) * 100;
+           progressBar.style.width = percentage + '%';
+
+           // Change color based on time remaining
+           if (percentage > 66) {
+               progressBar.style.background = '#28a745'; // Green
+           } else if (percentage > 33) {
+               progressBar.style.background = '#ffc107'; // Yellow
+           } else {
+               progressBar.style.background = '#dc3545'; // Red
+           }
+       }
+
+       // Reset inactivity timer when user types
+       function resetInactivityTimer() {
+           lastActivity = Date.now();
+           warningDisplay.style.display = 'none';
+
+           // Clear existing timer
+           clearTimeout(inactivityTimer);
+
+           // Set new 10-second timer
+           inactivityTimer = setTimeout(() => {
+               // Clear text and refresh page
+               textarea.value = '';
+               alert('No activity detected. Refreshing page...');
+               location.reload();
+           }, 10000);
+
+           // Show warning after 5 seconds of inactivity
+           setTimeout(() => {
+               if (Date.now() - lastActivity >= 5000) {
+                   warningDisplay.style.display = 'block';
+               }
+           }, 5000);
+       }
+
+       // Listen for typing activity
+       textarea.addEventListener('input', resetInactivityTimer);
+       textarea.addEventListener('keydown', resetInactivityTimer);
+
+       // Main countdown timer
+       function updateTimer() {
+           updateProgressBar();
+
+           if (timeLeft <= 0) {
+               textarea.disabled = true;
+               progressBar.style.width = '0%';
+               progressBar.style.background = '#dc3545';
+               clearTimeout(inactivityTimer);
+               alert('Time is up! Your writing has been locked.');
+               return;
+           }
+
+           timeLeft--;
+           setTimeout(updateTimer, 1000);
+       }
+
+       // Start everything when page loads
+       textarea.focus();
+       updateTimer();
+       resetInactivityTimer();
+   </script>
+</body>
+</html>

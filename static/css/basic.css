@@ -5,6 +5,7 @@
     --primary-medium: #497D74;
     --primary-light: #71BBB2;
     --background-light: #EFE9D5;
+    --danger:#d9534f;
     --white: #ffffff;
     --gray-light: #f8f9fa;
     --gray-medium: #6c757d;
@@ -94,6 +95,8 @@ p {
     margin-bottom: 2rem;
     opacity: 0.9;
     color: var(--background-light);
+    padding-left: 2rem;
+    padding-right: 2rem;
 }
 
 .text-center {
@@ -590,7 +593,7 @@ p {
 
 .mode-text {
     font-weight: 600;
-    color: var(--primary-dark);
+    color: var(--white);
     font-size: 1.2rem;
     margin-bottom: 0.5rem;
 }
@@ -644,7 +647,6 @@ p {
 }
 
 .btn {
-    background-color: var(--primary-light);
     color: var(--white);
     border: none;
     padding: 0.75rem 2rem;
@@ -655,9 +657,24 @@ p {
 }
 
 .btn:hover {
-    background-color: var(--primary-medium);
-    transform: translateY(-2px);
+    transform: translateY(-1px);
     box-shadow: 0 5px 15px var(--shadow-hover);
+}
+
+.btn-primary {
+    background-color: var(--primary-light);
+}
+
+.btn-primary:hover {
+    background-color: var(--primary-medium);
+}
+
+.btn-danger {
+    background-color: var(--danger);
+}
+
+.btn-secondary {
+    background-color: var(--secondary-light);
 }
 
 .info-section {

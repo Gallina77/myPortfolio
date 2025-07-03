@@ -1,6 +1,7 @@
 from flask import session, redirect, url_for, request, render_template, Flask
 from portfolio.morse_code_translator import MorseCodeTranslator
 from portfolio.tic_tac_toe import TicTacToe
+from portfolio.type_and_let_go import TypeAndLetGo
 import os
 import json
 
@@ -26,7 +27,6 @@ def project_details(project_id):
     with open("./portfolio/project_details.json") as f:
         data = json.load(f)
         project = next((p for p in data["projects"] if p["id"] == project_id), None)
-    print(project)
 
     return render_template('project_details.html', project=project)
 
@@ -91,7 +91,18 @@ def tic_tac_toe():
                            message=game.message,
                            game_over=game.game_over)
 
+@app.route('/type_and_let_go', methods=['GET', 'POST'])
+def type_and_let_go():
+    if request.method == 'GET' and request.args.get('new_prompt'):
+        prompt = TypeAndLetGo().get_prompt()
+    else:
+        prompt = TypeAndLetGo().get_prompt()
+    return render_template('projects/type_and_let_go.html', prompt=prompt)
 
+@app.route('/writing')
+def writing():
+    prompt = request.args.get('prompt', '')
+    return render_template('projects/writing.html', prompt=prompt, writing_time=100)
 
 if __name__ == '__main__':
     app.run(debug=False)

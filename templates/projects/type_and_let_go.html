@@ -1,0 +1,102 @@
+{% include "header.html" %}
+{% include "hero.html" %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <img class="medium-center-image" src="../static/images/type_and_go_icon.png" alt="Type and Go Icon">
+        <h1 class="hero-title text-center">Type and Let Go</h1>
+        <p class="hero-subtitle text-center">This is a fun, no-pressure writing warm-up exercise designed to help you
+            get your creative juices flowing.
+            Whether you’re facing writer’s block or just want to loosen up your fingers, this app encourages you to
+            write continuously —
+            because if you stop typing for too long, all your words will disappear!
+            Think of it as a playful challenge to keep your ideas moving without overthinking.</p>
+    </div>
+    <!-- Information Section -->
+    <div class="info-section">
+        <h3 class="info-title">How to Use</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>1.</h4>
+                <p>Start typing in the large text box — anything goes! It’s your chance to write freely without worrying
+                    about grammar or spelling.</p>
+            </div>
+            <div class="info-card">
+                <h4>2.</h4>
+                <p>But before you start, choose a writing prompt to spark your imagination (or you can ignore it and
+                    write whatever you want).</p>
+            </div>
+            <div class="info-card">
+                <h4>3.</h4>
+                <p>Keep typing to avoid the countdown timer. If you stop for 10 seconds, the text will be erased — so
+                    keep the flow going!</p>
+            </div>
+            <div class="info-card">
+                <h4>4.</h4>
+                <p>Watch the color-coded countdown display for a visual warning when your time is almost up.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Main Translator -->
+    <div class="project-container">
+        <form method="GET" class="type_and_let_go_form">
+            <div class="input-group">
+                <label class="output-label" for="text-output">Writing Prompt</label>
+                <textarea name="text-output" id="text-output" class="text-output" readonly>{{prompt}}</textarea>
+            </div>
+            <div class="button-group">
+                <!-- Triggers next prompt -->
+                <button type="button" onclick="getNewPrompt(event)" class="btn btn-primary">
+                    <div class="mode-text">Get Prompt</div>
+                </button>
+                <!-- Triggers the writing page with the initial prompt -->
+                <button type="button" onclick="openWritingPage(event)" class="btn btn-danger">
+                    <div class="mode-text">Start Writing</div>
+                </button>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>
+<script>
+let currentPrompt = '';
+
+function getNewPrompt(event) {
+    event.preventDefault();
+
+    fetch('{{ url_for("type_and_let_go") }}?new_prompt=new_prompt')
+        .then(response => response.text())
+        .then(html => {
+            const parser = new DOMParser();
+            const doc = parser.parseFromString(html, 'text/html');
+            const newPrompt = doc.getElementById('text-output').value;
+
+            // Store in variable
+            currentPrompt = newPrompt;
+
+            // Update textarea if present
+            const textarea = document.getElementById('text-output');
+            if (textarea) {
+                textarea.style.opacity = '0.5';
+                setTimeout(() => {
+                    textarea.value = newPrompt;
+                    textarea.style.opacity = '1';
+                }, 200);
+            }
+        })
+        .catch(error => console.error('Error:', error));
+}
+
+function openWritingPage(event) {
+    event.preventDefault();
+
+    if (currentPrompt) {
+        // Open writing page with prompt in URL
+        window.location.href = `{{ url_for("writing") }}?prompt=${encodeURIComponent(currentPrompt)}`;
+    } else {
+        alert('Please get a prompt first!');
+    }
+}
+</script>
+{% include "footer.html" %}

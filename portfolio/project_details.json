@@ -36,6 +36,25 @@
         "HTML/CSS"
       ],
       "learning": "Developing this project taught me how to implement unit testing and gave me experience managing partial control of the game state both within a Python class and the Flask app. I learned to encode the game logic using winning combinations. Currently, the app refreshes the page after each move, so gameplay could be smoother with AJAX or JavaScript. However, I intentionally built it using only the concepts I had learned so far."
+    },
+      {
+      "id": "3",
+      "title": "Type and Let Go",
+      "subtitle": "A web app to kickstart creativity. The user needs to write fast or lose it",
+      "overview": "Building my own version of The Most Dangerous Writing App, with a basic text editor that deletes everything if the user stops typing for a set period.",
+      "features": [
+        "Spacious text box that displays the current word count",
+        "Provides random writing prompts sourced from a predefined JSON file",
+        "Automatically clears the text box if no typing is detected for 30 seconds",
+        "Color-coded countdown timer offering a clear visual warning before deletion"
+      ],
+      "technologies_used": [
+        "Python",
+        "Flask",
+        "Javascript",
+        "Json"
+      ],
+      "learning": "I worked with Claude AI to get the Javascript as otherwise the User Experience would had been very poor. The actual Python Learning has been limited. But I got a lot better at prompting."
     }
   ]
 }

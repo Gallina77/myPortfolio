@@ -10,7 +10,7 @@ import torch
 
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
-
+api_token = os.getenv('HF_API_TOKEN')
 
 #DATABASE_URL = os.environ.get('DB_URI')
 #conn = psycopg2.connect(DATABASE_URL)
@@ -111,12 +111,9 @@ def writing():
 
 @app.route('/memory_palace')
 def memory_palace():
-    try:
-        generator = pipeline('text-generation', model='gpt2')  # or distilgpt2 for a lighter version
-        result = generator("What should I remember today?", max_length=50)
-        return str(result)
-    except Exception as e:
-        return f"Error occurred: {e}", 500
+    generator = pipeline('text-generation', model='distilgpt2', use_auth_token=api_token)
+    result = generator("What should I remember today?", max_length=50)
+    return str(result)
 
 if __name__ == '__main__':
     app.run(debug=False)

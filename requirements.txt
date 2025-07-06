@@ -4,7 +4,10 @@ gunicorn==23.0.0
 psycopg2-binary==2.9.10
 flask-bootstrap4==4.0.2
 Flask_WTF==1.2.2
-
-
-
-
+matplotlib~=3.10.3
+pillow~=11.2.1
+sounddevice~=0.5.2
+scipy~=1.16.0
+SpeechRecognition~=3.14.3
+requests~=2.32.4
+transformers~=4.53.1

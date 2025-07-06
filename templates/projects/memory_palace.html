@@ -1,0 +1,66 @@
+{% include "header.html" %}
+{% include "hero.html" %}
+<div class="container">
+    <!-- Hero Section -->
+    <div class="hero-section">
+        <img class="medium-center-image" src="../static/images/type_and_go_icon.png" alt="Type and Go Icon">
+        <h1 class="hero-title text-center">Memory Palace</h1>
+        <p class="hero-subtitle text-center">Inspired from the Book "Mnemonic Memory Palace" from Sjur Midtun this
+            shall be an introduction on how to train the technique of storing and memorizing any information you need to
+            re-call.
+            If you want to know more about this ancient technique, check the behind the scenes page of this mini
+            project.</p>
+    </div>
+    <!-- Information Section -->
+    <div class="info-section">
+        <h3 class="info-title">How to Build your Memory Palace</h3>
+        <div class="info-grid">
+            <div class="info-card">
+                <h4>1.</h4>
+                <p>As a Beginner build your Memory Palace from a location you know well. Close your eyes and imagine
+                    your Apartment,
+                    your house, the place where you work. Go through the room in one direction, e.g. clockwise and
+                    identify objects
+                    on which you can "hang" your information.
+                </p>
+            </div>
+            <div class="info-card">
+                <h4>2.</h4>
+                <p>Enter all objects, also called "pegs" and build your list.</p>
+            </div>
+            <div class="info-card">
+                <h4>3.</h4>
+                <p>As a next step you need to build a list that you want to memorize. Use the speech button and </p>
+            </div>
+            <div class="info-card">
+                <h4>4.</h4>
+                <p>As a final step click on "Build my Memory Palace". Close your eyes, let the images being created and
+                    your brain as it loves fun and crazy stuff.
+                    Now you have proof that you have a good memory.</p>
+            </div>
+        </div>
+    </div>
+
+    <!-- Memory Palace Builder -->
+    <div class="project-container">
+        <div class="app_status" id="app_status">{{ message }}</div>
+        <form method="POST" class="memory_palace_object_form">
+            <div class="todo-container">
+                <label class="output-label">List here all the objects and furniture you want to use as pegs</label>
+                <input type="text" id="objectInput" placeholder="Add a new task...">
+                <ul id="todoList"></ul>
+            </div>
+            <div class="button-group">
+                <!-- Start Voice Recording -->
+                <button type="submit" name="voice_recording" value="voice_recording" class="btn btn-primary">
+                    <div class="voice_recording">Start Recording</div>
+                </button>
+                <!-- Triggers the writing page with the initial prompt -->
+                <button type="button" class="btn btn-danger">
+                    <div class="mode-text">Build my Memory Palace</div>
+                </button>
+                </button>
+            </div>
+        </form>
+    </div>
+</div>

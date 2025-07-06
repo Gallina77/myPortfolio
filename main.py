@@ -5,6 +5,7 @@ from portfolio.type_and_let_go import TypeAndLetGo
 import os
 import json
 from transformers import pipeline
+import torch
 
 
 app = Flask(__name__)
@@ -107,7 +108,7 @@ def writing():
     return render_template('projects/writing.html', prompt=prompt, writing_time=100)
 
 
-@app.route('/memory_palace',  methods=['GET', 'POST'])
+@app.route('/memory_palace')
 def memory_palace():
     generator = pipeline('text-generation', model='gpt2')
     result = generator("Once upon a time", max_length=50)

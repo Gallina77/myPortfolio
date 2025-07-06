@@ -7,15 +7,9 @@ import json
 from transformers import pipeline
 import torch
 
-
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 api_token = os.getenv('HF_API_TOKEN')
-
-#DATABASE_URL = os.environ.get('DB_URI')
-#conn = psycopg2.connect(DATABASE_URL)
-#Replace user and password with your Postgres username and password, host and #port with the values in your database URL, and database_name with the name of #your database.
-#cur = conn.cursor()
 
 @app.route('/')
 def index():

@@ -2,7 +2,6 @@ from flask import session, redirect, url_for, request, render_template, Flask
 from portfolio.morse_code_translator import MorseCodeTranslator
 from portfolio.tic_tac_toe import TicTacToe
 from portfolio.type_and_let_go import TypeAndLetGo
-from portfolio.memory_palace import MemoryPalace
 import os
 import json
 from transformers import pipeline
@@ -113,15 +112,6 @@ def memory_palace():
     generator = pipeline('text-generation', model='gpt2')
     result = generator("Once upon a time", max_length=50)
     return str(result)
-    ''' my_palace = MemoryPalace()
-     message = None
-     if request.method == 'GET' and request.args.get('voice_recording'):
-         my_palace.voice_recording()
-         message="Your recording is ready"
-
-     return render_template('projects/memory_palace.html', message=message)'''
-
-
 
 if __name__ == '__main__':
     app.run(debug=False)

@@ -11,6 +11,7 @@ import torch
 app = Flask(__name__)
 app.config['SECRET_KEY'] = os.environ.get('FLASK_KEY')
 
+
 #DATABASE_URL = os.environ.get('DB_URI')
 #conn = psycopg2.connect(DATABASE_URL)
 #Replace user and password with your Postgres username and password, host and #port with the values in your database URL, and database_name with the name of #your database.
@@ -110,9 +111,12 @@ def writing():
 
 @app.route('/memory_palace')
 def memory_palace():
-    generator = pipeline('text-generation', model='gpt2')
-    result = generator("Once upon a time", max_length=50)
-    return str(result)
+    try:
+        generator = pipeline('text-generation', model='gpt2')  # or distilgpt2 for a lighter version
+        result = generator("What should I remember today?", max_length=50)
+        return str(result)
+    except Exception as e:
+        return f"Error occurred: {e}", 500
 
 if __name__ == '__main__':
     app.run(debug=False)
